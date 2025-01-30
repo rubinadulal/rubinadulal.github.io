@@ -23,12 +23,15 @@ function volume() {
 function darktheme(){
     document.getElementById('page').classList.remove('lighttheme');
     document.getElementById('page').classList.add('darktheme');
+    document.getElementById('current_theme').innerHTML="Current Theme: Dark";
 }
 function lighttheme(){
     document.getElementById('page').classList.remove('darktheme');
     document.getElementById('page').classList.add('lighttheme');
+    document.getElementById('current_theme').innerHTML="Current Theme: Light";
 }
 function defaulttheme(){
     document.getElementById('page').classList.remove('lighttheme');
     document.getElementById('page').classList.remove('darktheme');
+    document.getElementById('current_theme').innerHTML="Current Theme: Default";
 }

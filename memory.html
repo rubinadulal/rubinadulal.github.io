@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Portfolio, Rubss, Rubina, Dulal">
+    <meta author = "Rubina Dulal">
+    <title>Memory Match</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <style>
+        .tile {
+            background-color: #f0c3c3;
+            width: 90px;
+            height: 80px;
+            margin: 5px;
+            border-radius: 4px;
+            font-size: 1.5rem;
+        }
+
+        td {
+            width: 55px;
+            height: 55px;
+            background-color: rgb(45, 213, 210);
+        }
+    </style>
+
+</head>
+
+<body id="bodyy">
+
+    <div class="brain">
+        <h1>Memory Match</h1>
+    </div>
+
+    <p><button onclick="resetBoard()">Reset Game</button></p>
+    <div id="gameBoard"></div>
+
+    <div class="theme">
+        <button onclick="darktheme()"> &#127769; </button>
+        <button onclick="lighttheme()"> &#9728 </button>
+        <button onclick="defaulttheme()"> Default</button>
+        <p id="current_theme">Current Theme: Default</p>
+    </div>
+
+    <script>
+        function darktheme(){
+            document.getElementById('bodyy').classList.remove('lighttheme');
+            document.getElementById('bodyy').classList.add('darktheme');
+            document.getElementById('current_theme').innerHTML="Current Theme: Dark";
+        }
+        function lighttheme(){
+            document.getElementById('bodyy').classList.remove('darktheme');
+            document.getElementById('bodyy').classList.add('lighttheme');
+            document.getElementById('current_theme').innerHTML="Current Theme: Light";
+        }
+        function defaulttheme(){
+            document.getElementById('bodyy').classList.remove('lighttheme');
+            document.getElementById('bodyy').classList.remove('darktheme');
+            document.getElementById('current_theme').innerHTML="Current Theme: Default";
+        }
+        
+        
+        
+        let map = [];
+        let tile1 = null, tile2 = null;
+        
+        const shuffle = (array) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        };
+        
+        const loadMap = (rows = 4, cols = 4) => {
+            if ((rows * cols) % 2 !== 0) {
+                console.log("The total number of tiles must be even.");
+                return [];
+            }
+        
+            const tile_value_max = (rows * cols) / 2;
+            
+            let tile_pairs = [];
+        
+            for (let i = 1; i <= tile_value_max; i++) {
+                tile_pairs.push(i, i);
+            }
+        
+            tile_pairs = shuffle(tile_pairs);
+            let tile_map = [];
+        
+            for (let r = 0; r < rows; r++) {
+                tile_map.push(tile_pairs.splice(0, cols));
+            }
+        
+            return tile_map;
+        };
+        
+        const makeBoard = (rows = 4, cols = 4) => {
+            let output = '<table>';
+            for (let row = 0; row < rows; row++) {
+                output += '<tr>';
+                for (let col = 0; col < cols; col++) {
+                    output += '<td><button' +
+                        ' class="tile"' +
+                        ' id="' + row + '_' + col + '"' +
+                        ' onclick="process(' + row + ',' + col + ')">' +
+                        '</button></td>';
+                }
+                output += '</tr>';
+            }
+            output += '</table>';
+            document.getElementById("gameBoard").innerHTML = output;
+        };
+        
+        const resetBoard = () => {
+            tile1 = null;
+            tile2 = null;
+            map = loadMap();
+            makeBoard();
+        };
+        
+        const process = (row, col) => {
+            let clicked_tile = document.getElementById(row + "_" + col);
+        
+            if (!clicked_tile.innerHTML) {
+                if (!tile1) {
+                    tile1 = clicked_tile;
+                    clicked_tile.innerHTML = map[row][col];
+                } else if (!tile2) {
+                    tile2 = clicked_tile;
+                    clicked_tile.innerHTML = map[row][col];
+        
+                    setTimeout(checkMatch, 1000);
+                }
+            }
+        };
+        
+        const checkMatch = () => {
+            if (tile1.innerHTML === tile2.innerHTML) {
+                tile1.hidden = true;
+                tile2.hidden = true;
+            } else {
+                tile1.innerHTML = "";
+                tile2.innerHTML = "";
+            }
+        
+            tile1 = null;
+            tile2 = null;
+        };
+        
+        resetBoard();
+    </script>
+
+</body>
+</html>

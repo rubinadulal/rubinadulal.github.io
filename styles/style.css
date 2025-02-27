@@ -39,17 +39,10 @@ body {
     color: #000000;
     padding: 0;
     font-size: 17px;
-    position: bottom;
-    left: 0;
-    width: 100%;
-    bottom: 80px;
 }
 
 .rights {
     text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
     width: 100%;
     background-color: rgb(177, 96, 96);
     color: #000000;
@@ -276,6 +269,45 @@ button:hover {
     cursor: pointer;
     font-size: 1.2rem;
     font-family: inherit;
+}
+
+#guess {
+    background-color: #e7a4a4;
+    border: 5px solid #938888;
+    padding: 15px 35px;
+    margin: 1px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-family: inherit;
+}
+
+#slot1 {
+    width: 60px;
+    height: 60px;
+    font-size: 40px;
+    border: 3px solid #0e83a0;
+}
+
+#slot2 {
+    width: 60px;
+    height: 60px;
+    font-size: 40px;
+    border: 3px solid #0e83a0;
+}
+
+#slot3 {
+    width: 60px;
+    height: 60px;
+    font-size: 40px;
+    border: 3px solid #0e83a0;
+}
+
+#slot4 {
+    width: 60px;
+    height: 60px;
+    font-size: 40px;
+    border: 3px solid #0e83a0;
 }
 
 

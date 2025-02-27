@@ -90,6 +90,9 @@ body.lighttheme .brain{
 body.lighttheme .rights{
     background-color: #e0ac92;
 }
+body.lighttheme .right{
+    background-color: #e0ac92;
+}
 
 body.lighttheme .prgh{
     background-color: #d3e3d2;
@@ -121,6 +124,11 @@ body.darktheme .future{
 }
 
 body.darktheme .rights{
+    background-color: #586e75;
+    color: #000000;
+}
+
+body.darktheme .right{
     background-color: #586e75;
     color: #000000;
 }
@@ -194,6 +202,9 @@ button:hover {
 #bodyy.lighttheme .rights{
     background-color: #e0ac92;
 }
+#bodyy.lighttheme .right{
+    background-color: #e0ac92;
+}
 
 .lighttheme .theme button {
     background-color: #c7be96;
@@ -217,6 +228,11 @@ button:hover {
 }
 
 #bodyy.darktheme .rights{
+    background-color: #586e75;
+    color: #000000;
+}
+
+#bodyy.darktheme .right{
     background-color: #586e75;
     color: #000000;
 }
@@ -310,4 +326,14 @@ button:hover {
     border: 3px solid #0e83a0;
 }
 
-
+.right {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(177, 96, 96);
+    color: #000000;
+    padding: 2px 16px;
+    font-size: 15px; 
+}

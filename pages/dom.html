@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DOM Puzzle</title>
+<style>
+#puzzle { width: 500px; height: 500px; border: 5px solid black;
+}
+</style>
+</head>
+<body>
+
+<div id='puzzle'></div>
+
+<script>
+
+// All puzzle code must be implemented here
+
+
+    let headEr = document.createElement("h1");
+        headEr.textContent = "DOM Puzzle";
+        headEr.style.textAlign = "left"; 
+        headEr.style.fontSize = "28px"; 
+        headEr.style.fontWeight = "bold";
+        document.body.insertBefore(headEr, document.getElementById("puzzle"));
+
+
+
+
+    let puzzle = document.getElementById("puzzle");
+        puzzle.style.display = "grid";
+        puzzle.style.gridTemplateColumns = "250px 250px";    
+        puzzle.style.gridTemplateRows = "250px 250px";  
+        puzzle.style.backgroundColor = "#7338A0";
+
+
+
+
+
+    const buttoon = (label, color) => {
+        let button = document.createElement("button");
+        button.textContent = label;
+        button.style.width = "125px";
+        button.style.height = "125px";
+        button.style.fontSize = "20px";
+        button.style.backgroundColor = color;
+        return button;
+    };
+
+
+
+
+    let tl_container = document.createElement("div");
+        tl_container.style.display = "grid";
+        tl_container.style.gridTemplateColumns = "125px 125px";   
+        tl_container.style.gridTemplateRows = "125px 125px";    
+
+
+
+
+    let button_colors = ["#9455F4", "#4A2B74", "#594492", "#854DDC"];
+    let labels = ["A", "B", "C", "D"];
+
+
+
+
+    labels.forEach((label, i) => {
+        tl_container.appendChild(buttoon(label, button_colors[i]))
+    });
+
+
+    puzzle.appendChild(tl_container);
+
+
+
+    let tr_container = document.createElement("div");
+    puzzle.appendChild(tr_container);
+
+
+    let bl_container = document.createElement("div");
+    puzzle.appendChild(bl_container);
+
+
+    let small_containers = document.createElement("div");
+        small_containers.style.display = "grid";
+        small_containers.style.gridTemplateColumns = "repeat(10, 25px)";
+        small_containers.style.gridTemplateRows = "repeat(10, 25px)";
+        small_containers.style.width = "250px";
+        small_containers.style.height = "250px";
+
+
+    let tinyButtons = [];
+
+
+    const small_buttons = (row, col) => {
+        let button = document.createElement("button");
+            button.style.width = "25px";
+            button.style.height = "24px";
+            button.style.backgroundColor = "#C39CFE";
+            button.style.border = "1px solid black";
+
+
+        button.addEventListener("click", (event) => {
+            event.preventDefault();
+
+
+            button.style.backgroundColor = "#4A2574";
+            
+
+            if (col > 0) {
+                tinyButtons[row][col - 1].style.backgroundColor = "#FF9E00";
+            }
+            if (col < 9) {
+                tinyButtons[row][col + 1].style.backgroundColor = "#FF9E00";
+            }
+        });
+
+        return button;
+    };
+
+    for (let row = 0; row < 10; row++) {
+        tinyButtons[row] = [];
+        for (let col = 0; col < 10; col++) {
+            let button = small_buttons(row, col);
+            tinyButtons[row].push(button);
+            small_containers.appendChild(button);
+        }
+    }
+
+    puzzle.appendChild(small_containers);
+
+
+    puzzle.addEventListener("mouseenter", (event) => {
+        event.preventDefault();
+        puzzle.style.border = "5px solid #FF9E00";
+    });
+
+
+    puzzle.addEventListener("mouseleave", (event) => {
+        event.preventDefault();
+        puzzle.style.border = "5px solid black";
+    });
+
+
+    let description = document.createElement("p");
+        description.textContent = "This is a puzzle created entirely with JavaScript.";
+        description.style.textAlign = "left";
+        description.style.fontSize = "14px";
+        document.body.appendChild(description);
+
+
+</script>
+</body>
+</html>

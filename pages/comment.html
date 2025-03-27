@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Portfolio, Rubss, Rubina, Dulal">
+    <meta author = "Rubina Dulal">
+    <title>Comment Submission Form</title>
+    <link rel="stylesheet" type="text/css" href="../styles/style.css">
+</head>
+<body id="bodyy">
+
+        <div class="brain">
+            <h1>Comment Submission Form</h1>
+        </div>
+        <form id="cmtForm">
+
+        <label for="name">Name: </label>
+
+        <input type="text" id="name" name="name" placeholder="i.e. Rubina Dulal" pattern="[A-Za-z\s]+" required>
+
+        <br>
+        <br>
+
+
+        
+        <label for="phone">Phone Number: </label>
+
+        <input type="tel" id="phone" name="phone" placeholder="XXX-XXX-XXXX" pattern="\d{3}-\d{3}-\d{4}" required>
+
+        <br>
+        <br>
+
+
+        <label for="email">Email Address:</label>
+
+		<input type="email" id="email" name="email" placeholder="i.e. yourname@gmail.com" autocomplete="email" required>
+
+		<br>
+        <br>
+
+
+        <label for="comment">Comment:</label>
+
+        <textarea id="comment" name="comment" placeholder="Write your comment here!" required></textarea>
+
+        <br>
+        <br>
+
+
+        <label for="username">Username:</label>
+
+        <input id="username" name="username" type="text" pattern="[a-zA-Z0-9_]{4,8}">
+
+        <span id="usernameFeedback"></span>
+
+        <br>
+        <br>
+        
+
+        <label for="password">Password:</label>
+
+        <input id="password" name="password" type="password">
+
+        <span id="passwordMessage"></span>
+
+		<br>
+        <br>
+
+
+        <button id="add" type="submit">Submit</button>
+
+    </form>
+
+
+    <script>
+        document.getElementById("username").addEventListener("input", function() {
+            const username = this.value;
+            const usernameFeedback = document.getElementById("usernameFeedback");
+            const validUsername = /^[a-zA-Z0-9_]{4,8}$/;
+
+
+
+            
+            if (!validUsername.test(username)) {
+                usernameFeedback.innerHTML = "Username should be 4-8 characters long, Must contain letters, and can also contain numbers and underscores but no spaces!!!";
+            }
+            else {
+                usernameFeedback.innerHTML = "";
+            }
+        });
+
+
+
+
+        document.getElementById('password').addEventListener("input", function() {
+			let password = this.value;
+			console.log(password);
+
+
+
+			const missing = [];
+
+
+			if (password.length < 8)
+				missing.push("8-character minimum");
+
+
+
+			let hasLower = /[a-z]/.test(password);
+			if (!hasLower)
+				missing.push("lower-case letters");
+
+
+
+			let hasUpper = /[A-Z]/.test(password);
+			if (!hasUpper)
+				missing.push("upper-case letters");
+
+
+
+			let hasNumber = /[0-9]/.test(password);
+			if (!hasNumber)
+				missing.push("numbers");
+
+
+
+			let hasSpecial = /[!@#$%&*()]/.test(password);
+			if (!hasSpecial)
+				missing.push("Special Characters !@#$%&*()");
+
+
+
+			const username = document.getElementById('username').value;
+			if (password.includes(username)) {
+				missing.push("Password cannot contain username")
+			}
+
+
+
+			const passwordMessage = document.getElementById('passwordMessage');
+            
+
+            if (missing.length > 0) {
+                passwordMessage.innerHTML = "<strong>Missing: </strong>" + missing.join(", ");
+            }
+
+
+            else {
+                passwordMessage.innerHTML = "<strong>Password Strength:</strong> Strong";
+            }
+		});
+
+
+
+        function sanitizeInput(input) {
+            return input.replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/&/g, "&amp;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&apos;");
+        }
+
+
+    document.getElementById("cmtForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+
+
+        const cmtDs = {
+            name: sanitizeInput(document.getElementById("name").value),
+            phone: sanitizeInput(document.getElementById("phone").value),
+            email: sanitizeInput(document.getElementById("email").value),
+            comment: sanitizeInput(document.getElementById("comment").value),
+            username: sanitizeInput(document.getElementById("username").value),
+            password: sanitizeInput(document.getElementById("password").value),
+        };
+
+        console.log("Sanitized Data:", cmtDs);
+        alert("YAYYY!!! You Did Great!!! Your Form Is Submitted! :)")
+        document.getElementById('cmtForm').reset();
+    });
+
+
+
+        function darktheme(){
+        document.getElementById('bodyy').classList.remove('lighttheme');
+        document.getElementById('bodyy').classList.add('darktheme');
+        document.getElementById('current_theme').innerHTML="Current Theme: Dark";
+    }
+    function lighttheme(){
+        document.getElementById('bodyy').classList.remove('darktheme');
+        document.getElementById('bodyy').classList.add('lighttheme');
+        document.getElementById('current_theme').innerHTML="Current Theme: Light";
+    }
+    function defaulttheme(){
+        document.getElementById('bodyy').classList.remove('lighttheme');
+        document.getElementById('bodyy').classList.remove('darktheme');
+        document.getElementById('current_theme').innerHTML="Current Theme: Default";
+    }
+
+
+    </script>
+
+
+<div class="theme">
+    <button onclick="darktheme()"> &#127769; </button>
+    <button onclick="lighttheme()"> &#9728 </button>
+    <button onclick="defaulttheme()"> Default</button>
+    <p id="current_theme">Current Theme: Default</p>
+    </div>
+
+<div class="right">
+    <p>&copy; Copyright 2025 Rubina Dulal. All rights reserved.</p>
+</div>
+</body>
+</html>
